@@ -85,3 +85,7 @@ This file is the index; keep it sorted by topic, newest additions at section bot
 - [Dream 7B](refs/dream.md) — remask taxonomy reference · [repo](https://github.com/DreamLM/Dream)
 - [Fast-dLLM](refs/fast-dllm.md) — approximate buffer-KV + parallel decoding for dLLMs · [repo](https://github.com/NVlabs/Fast-dLLM)
 - [BD3-LM](refs/bd3-lm.md) — block diffusion with AR-like KV reuse · [arXiv 2502.06768](https://arxiv.org/abs/2502.06768)
+
+## Project specs
+
+- [SMT v1 format spec](format/smt-v1-spec.md) — content-addressed, execution-layout-aware container; numeric-atom space; portable graph IR; delta composition (in design)
