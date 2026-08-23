@@ -1,79 +1,87 @@
-# Reference Library (running list)
+# Reference Index
 
-Maintenance convention: append-only. New entries go under the matching topic heading,
-one line each: `[Name](url) — what it is / why it matters`. Mark additions made after
-initialization with `(added YYYY-MM-DD)`.
+Atomic notes live in `docs/refs/` — one note per paper/system/format.
+This file is the index; keep it sorted by topic, newest additions at section bottoms.
 
-Initialized: 2026-08-23.
+**Maintenance rules (while planning):**
+1. New reference -> new note file in `docs/refs/<kebab-name>.md` using the standard template
+   (metadata table: Source / Link / Added / Tags, then Summary, Key mechanisms, Relevance to SMELT).
+2. Add exactly one index line here: `- [Title](refs/<file>.md) — one-liner · [source](url)`.
+3. Never grow this file into content; it is a table of contents only.
+4. Cross-link related notes inside notes (`See also:` line), not here.
 
-## LLM fundamentals
+## Fundamentals
 
-- [Attention Is All You Need](https://arxiv.org/abs/1706.03762) — the Transformer paper (Google, NeurIPS 2017); self-attention replaces recurrence; substrate of every current LLM.
-- [Language Models are Few-Shot Learners (GPT-3)](https://arxiv.org/abs/2005.14165) — scale → in-context learning; decoder-only lineage wins for generation.
-- [Scaling Laws for Neural LMs (Kaplan et al.)](https://arxiv.org/abs/2001.08361) — loss predicts from compute/params/tokens; made scaling an engineering discipline.
-- [Training Compute-Optimal LLMs (Chinchilla)](https://arxiv.org/abs/2203.15556) — token:param ratio guidance (~20:1); Google DeepMind.
-- [Chain-of-Thought Prompting](https://arxiv.org/abs/2201.11903) — intermediate steps unlock reasoning; seed of the reasoning-model era.
-- [InstructGPT / RLHF](https://arxiv.org/abs/2203.02155) — instruction tuning + preference optimization turned completers into assistants.
-- [DPO](https://arxiv.org/abs/2305.18290) — direct preference optimization; RLHF-free post-training staple.
+- [Attention Is All You Need](refs/transformer-attn-is-all-you-need.md) — the Transformer; self-attention replaces recurrence · [arXiv 1706.03762](https://arxiv.org/abs/1706.03762)
+- [GPT-3 few-shot](refs/gpt3-few-shot.md) — scale → in-context learning · [arXiv 2005.14165](https://arxiv.org/abs/2005.14165)
+- [Scaling Laws (Kaplan)](refs/scaling-laws-kaplan2020.md) — loss as power law in compute/params/data · [arXiv 2001.08361](https://arxiv.org/abs/2001.08361)
+- [Chinchilla compute-optimal](refs/chinchilla-compute-optimal.md) — ~20 tok:param at optimum · [arXiv 2203.15556](https://arxiv.org/abs/2203.15556)
+- [Chain-of-Thought](refs/chain-of-thought-wei2022.md) — intermediate steps unlock reasoning · [arXiv 2201.11903](https://arxiv.org/abs/2201.11903)
+- [InstructGPT / RLHF](refs/instructgpt-rlhf.md) — instruction tuning + preference RL · [arXiv 2203.02155](https://arxiv.org/abs/2203.02155)
+- [DPO](refs/dpo.md) — closed-form preference optimization · [arXiv 2305.18290](https://arxiv.org/abs/2305.18290)
 
-## Serving systems — datacenter
+## Serving engines — datacenter
 
-- [Orca (OSDI'22)](https://www.usenix.org/conference/osdi22/presentation/yu) — iteration-level (continuous) batching; every modern server inherits this.
-- [Efficient Memory Management for LLM Serving with PagedAttention (vLLM)](https://arxiv.org/abs/2309.06180) — OS-paged KV cache: block tables, COW, near-zero fragmentation. [repo](https://github.com/vllm-project/vllm) · [docs](https://docs.vllm.ai)
-- [SGLang](https://arxiv.org/abs/2312.07104) — RadixAttention prefix tree + frontend DSL; grew into full engine. [repo](https://github.com/sgl-project/sglang) · [docs](https://docs.sglang.io)
-- [Sarathi-Serve](https://arxiv.org/abs/2403.02310) — chunked prefill piggybacking decodes; token-budget scheduling origin.
-- [DistServe](https://arxiv.org/abs/2401.09670) — prefill/decode disaggregation; goodput-optimized.
-- [Mooncake](https://arxiv.org/abs/2407.00079) — KV-cache-centric disaggregated cluster (Moonshot/Kimi production).
-- [NanoFlow](https://arxiv.org/abs/2408.12757) — intra-device pipeline parallelism (compute/attention/host ops overlap).
-- [vAttention](https://arxiv.org/abs/2505.00289) — KV memory via CUDA virtual-memory APIs instead of fixed blocks.
-- [TensorRT-LLM](https://github.com/NVIDIA/TensorRT-LLM) — AOT-compiled engines, plugin kernel system, in-flight batching; closed-stack perf ceiling.
-- [NVIDIA Dynamo](https://github.com/ai-dynamo/dynamo) — serving orchestrator: disagg routing across TRT-LLM/vLLM workers.
-- [Text Generation Inference (TGI)](https://github.com/huggingface/text-generation-inference) — HF's Rust-router + Python-worker server; archived to maintenance mode Mar 2026 ([context](https://www.tekblueprint.org/blog/ai/llm-inference-frameworks-operations/)).
-- [LMDeploy / TurboMind](https://github.com/InternLM/lmdeploy) — FasterTransformer-lineage C++ engine, persistent-thread scheduling; AWQ-first.
-- [DeepSpeed-FastGen](https://github.com/microsoft/DeepSpeed) — Dynamic SplitFuse (chunked prefill precursor); largely superseded.
+- [Orca](refs/orca-osdi22-continuous-batching.md) — iteration-level continuous batching origin · [OSDI'22](https://www.usenix.org/conference/osdi22/presentation/yu)
+- [vLLM / PagedAttention](refs/vllm-pagedattention.md) — OS-paged KV, V1 rewrite, ecosystem breadth · [arXiv 2309.06180](https://arxiv.org/abs/2309.06180)
+- [SGLang / RadixAttention](refs/sglang-radixattention.md) — radix prefix sharing, overlap scheduler, MLA lead · [arXiv 2312.07104](https://arxiv.org/abs/2312.07104)
+- [Sarathi-Serve](refs/sarathi-serve.md) — chunked prefill + token-budget scheduling · [arXiv 2403.02310](https://arxiv.org/abs/2403.02310)
+- [DistServe](refs/distserve-pd-disagg.md) — prefill/decode disaggregation, goodput · [arXiv 2401.09670](https://arxiv.org/abs/2401.09670)
+- [Mooncake](refs/mooncake-kv-centric.md) — KV-centric disaggregated cluster (Kimi prod) · [arXiv 2407.00079](https://arxiv.org/abs/2407.00079)
+- [NanoFlow](refs/nanoflow.md) — intra-device pipeline overlap · [arXiv 2408.12757](https://arxiv.org/abs/2408.12757)
+- [vAttention](refs/vattention.md) — CUDA VMM-backed KV without fixed pages · [arXiv 2505.00289](https://arxiv.org/abs/2505.00289)
+- [TensorRT-LLM](refs/tensorrt-llm.md) — AOT compiled engines, plugin kernels · [repo](https://github.com/NVIDIA/TensorRT-LLM)
+- [NVIDIA Dynamo](refs/nvidia-dynamo.md) — multi-engine serving orchestrator · [repo](https://github.com/ai-dynamo/dynamo)
+- [TGI](refs/tgi.md) — HF server; archived Mar 2026 · [repo](https://github.com/huggingface/text-generation-inference)
+- [LMDeploy / TurboMind](refs/lmdeploy-turbomind.md) — FasterTransformer-lineage C++ engine · [repo](https://github.com/InternLM/lmdeploy)
+- [DeepSpeed-FastGen](refs/deepspeed-fastgen.md) — Dynamic SplitFuse precursor · [repo](https://github.com/microsoft/DeepSpeed)
 
-## Serving systems — local / edge
+## Serving engines — local / edge
 
-- [llama.cpp](https://github.com/ggml-org/llama.cpp) — ggml graph runtime, quant-format-first kernels, ubiquitous backends; desktop-AI default. ([ggml](https://github.com/ggml-org/ggml))
-- [Ollama](https://github.com/ollama/ollama) — distribution/UX layer over llama.cpp (Go daemon + model registry).
-- [LM Studio](https://lmstudio.ai) — GUI/local-server shell over llama.cpp runtimes.
-- [KTransformers](https://github.com/kvcache-ai/ktransformers) — desktop CPU-GPU hybrid for DeepSeek-class MoE; AMX/AVX-512 CPU experts, template injection.
-- [FreeToken](https://arxiv.org/html/2608.16157v1) — edge-native MoE serving (Berkeley Sky, Aug 2026): CPU-resident expert pool + elastic GPU expert cache; full-layer double-buffered prefill; q\*=m·B_P/B_H miss-split between PCIe fill and in-place CPU exec; semantic recurrent-state checkpoints surviving agent context edits; runtime VRAM re-budgeting. [repo](https://github.com/FlashML-org/FreeToken) · [site](https://flashml.ai) · [coverage](https://www.marktechpost.com/2026/08/23/meet-freetoken-an-edge-native-moe-serving-engine-that-runs-753b-glm-5-2-on-a-single-workstation-gpu/)
-- [MoE-Infinity](https://github.com/TerryEcho/MoE-Infinity) — activation-aware expert offloading predecessor.
-- [PowerInfer](https://github.com/SJTU-IPADS/PowerInfer) — hot/cold neuron locality for consumer-GPU dense inference.
-- [ExLlamaV2](https://github.com/turboderp/exllamav2) · [ExLlamaV3](https://github.com/turboderp/exllamav3) — consumer-GPU B=1 decode specialists; EXL2/EXL3 mixed-bpw formats.
-- [mistral.rs](https://github.com/EricLBuehler/mistral.rs) — Rust serving stack on candle; ISQ quantize-at-load. ([candle](https://github.com/huggingface/candle))
-- [MLX](https://github.com/ml-explore/mlx) · [mlx-lm](https://github.com/ml-explore/mlx-lm) — Apple unified-memory arrays framework; Mac counterpart of llama.cpp.
-- [MLC-LLM](https://github.com/mlc-ai/mlc-llm) — TVM machine-learning compilation; compile-model-to-portable-code philosophy (WebGPU/mobile).
+- [llama.cpp + ggml](refs/llamacpp-ggml.md) — graph interpreter, quant-first kernels, ubiquitous · [repo](https://github.com/ggml-org/llama.cpp)
+- [KTransformers](refs/ktransformers.md) — desktop CPU-GPU MoE hybrid, static placement · [repo](https://github.com/kvcache-ai/ktransformers)
+- [FreeToken](refs/freetoken.md) — elastic expert cache + q\* bandwidth-split miss policy + semantic state anchors · [arXiv 2608.16157](https://arxiv.org/html/2608.16157v1)
+- [MoE-Infinity](refs/moe-infinity.md) — activation-aware expert offloading · [repo](https://github.com/TerryEcho/MoE-Infinity)
+- [PowerInfer](refs/powerinfer.md) — hot/cold neuron CPU-GPU dense hybrid · [repo](https://github.com/SJTU-IPADS/PowerInfer)
+- [ExLlamaV2 / EXL2](refs/exllamav2-exl2.md) — mixed-bpw consumer decode specialist · [repo](https://github.com/turboderp/exllamav2)
+- [ExLlamaV3 / EXL3](refs/exllamav3-exl3.md) — QTIP trellis quant, Rust rewrite · [repo](https://github.com/turboderp/exllamav3)
+- [mistral.rs + candle](refs/mistralrs.md) — Rust stack; default-algo GEMM ceiling evidence · [repo](https://github.com/EricLBuehler/mistral.rs)
+- [MLX](refs/mlx.md) — Apple unified-memory framework · [repo](https://github.com/ml-explore/mlx)
+- [MLC-LLM](refs/mlc-llm.md) — TVM compile-to-portable-code · [repo](https://github.com/mlc-ai/mlc-llm)
 
-## Kernels & attention
+## Kernels
 
-- [FlashAttention](https://arxiv.org/abs/2205.14135) · [FA2](https://arxiv.org/abs/2307.08691) · [FA3](https://arxiv.org/abs/2407.08608) — IO-aware exact attention; tiling + online softmax.
-- [FlashInfer](https://github.com/flashinfer-ai/flashinfer) — kernel library powering vLLM/SGLang attention paths.
-- [CUTLASS](https://github.com/NVIDIA/cutlass/blob/main/README.md) — NVIDIA template kernel library; bring-up comparison baseline.
-- [Beating cuBLAS on RTX 5090](https://www.cloudrift.ai/blog/beating-cublas-on-rtx-5090) — measured cuBLAS FMA-pipe gaps on GB202; motivation for own GEMM plans.
+- [FlashAttention 1/2/3](refs/flashattention-1-2-3.md) — IO-aware exact attention lineage · [FA](https://arxiv.org/abs/2205.14135) / [FA2](https://arxiv.org/abs/2307.08691) / [FA3](https://arxiv.org/abs/2407.08608)
+- [FlashInfer](refs/flashinfer.md) — plan/run kernel library behind vLLM/SGLang · [repo](https://github.com/flashinfer-ai/flashinfer)
+- [CUTLASS](refs/cutlass.md) — NVIDIA template GEMM library · [repo](https://github.com/NVIDIA/cutlass)
+- [Beating cuBLAS on RTX 5090](refs/cublas-5090-gap.md) — cuBLAS FMA-pipe gap on GB202 · [blog](https://www.cloudrift.ai/blog/beating-cublas-on-rtx-5090)
 
-## Quantization & weight formats
+## Weight formats & quantization
 
-- [GPTQ](https://arxiv.org/abs/2210.17323) · [AWQ](https://arxiv.org/abs/2306.00945) · [HQQ](https://github.com/dropbox/hqq) — W4-family weight-quant methods.
-- [Marlin](https://github.com/IST-DASLab/marlin) — W4A16 repacked-layout GEMM kernels; permute-at-conversion lesson.
-- [SmoothQuant](https://arxiv.org/abs/2211.10438) · [QuaRot](https://arxiv.org/abs/2404.00456) — activation-outlier handling for W8A8/W4A8.
-- [NVFP4 @ NVIDIA](https://developer.nvidia.com/blog/tag/nvfp4/) — 4-bit two-level block scaling for Blackwell tensor cores.
-- [GGUF spec](https://github.com/ggml-org/ggml/blob/master/docs/gguf.md) — single-file portable weight container + metadata KV.
+- [safetensors](refs/safetensors.md) — no-pickle container; JSON header + raw blob; sharding index · [repo](https://github.com/huggingface/safetensors)
+- [GGUF](refs/gguf.md) — single-file container w/ typed KV metadata + native tokenizer · [spec](https://github.com/ggml-org/ggml/blob/master/docs/gguf.md)
+- [GGML k-quant/i-quant anatomy](refs/ggml-kquant-formats.md) — block layouts from Q4_0 to IQ4_XS/MXFP4 · [spec](https://github.com/ggml-org/ggml/blob/master/docs/gguf.md)
+- [GPTQ](refs/gptq.md) — Hessian-compensated int4; packed-tensor convention · [arXiv 2210.17323](https://arxiv.org/abs/2210.17323)
+- [AWQ](refs/awq.md) — activation-aware channel scaling · [arXiv 2306.00945](https://arxiv.org/abs/2306.00945)
+- [HQQ](refs/hqq.md) — calibration-free fast quant · [repo](https://github.com/dropbox/hqq)
+- [Marlin](refs/marlin.md) — W4A16 repacked-layout tensor-core GEMM · [repo](https://github.com/IST-DASLab/marlin)
+- [SmoothQuant](refs/smoothquant.md) — outlier migration for W8A8 · [arXiv 2211.10438](https://arxiv.org/abs/2211.10438)
+- [QuaRot / SpinQuant](refs/quarot-spinquant.md) — rotation-based outlier suppression · [arXiv 2404.00456](https://arxiv.org/abs/2404.00456)
+- [NVFP4 / MXFP4](refs/nvfp4-mxfp4.md) — Blackwell block-scaled 4-bit tiers · [NVIDIA](https://developer.nvidia.com/blog/tag/nvfp4/)
 
-## Speculative decoding & reasoning serving
+## Speculation & reasoning serving
 
-- [Fast Inference via Speculative Decoding](https://arxiv.org/abs/2211.17192) — draft-verify foundation.
-- [Medusa](https://arxiv.org/abs/2401.10774) · [EAGLE](https://github.com/SafeAILab/EAGLE) — multi-head / feature-aware drafting trees.
-- [DeepSeek-V3 tech report](https://arxiv.org/abs/2412.19437) — MLA, MoE aux-loss-free routing, Multi-Token Prediction heads.
-- [s1: budget forcing](https://arxiv.org/abs/2501.19393) — test-time thinking control via forced end-think injection.
-- [llguidance](https://raw.githubusercontent.com/guidance-ai/llguidance/main/README.md) · [XGrammar-2](https://blog.mlc.ai/2026/05/04/xgrammar-2-fast-customizable-structured-generation) — constrained decoding backends.
-- [vLLM reasoning outputs](https://docs.vllm.ai/en/latest/features/reasoning_outputs.html) · [SGLang separate reasoning](https://docs.sglang.io/docs/advanced_features/separate_reasoning.md) — reasoning/content stream separation conventions.
+- [Speculative decoding](refs/speculative-decoding.md) — draft-verify, exact distribution · [arXiv 2211.17192](https://arxiv.org/abs/2211.17192)
+- [Medusa](refs/medusa.md) — multi-head tree drafting · [arXiv 2401.10774](https://arxiv.org/abs/2401.10774)
+- [EAGLE 1/2/3](refs/eagle.md) — feature-space drafting trees · [repo](https://github.com/SafeAILab/EAGLE)
+- [DeepSeek-V3 report](refs/deepseek-v3-mla-mtp.md) — MLA latent KV + MTP heads + routing · [arXiv 2412.19437](https://arxiv.org/abs/2412.19437)
+- [s1 budget forcing](refs/s1-budget-forcing.md) — forced end-think injection · [arXiv 2501.19393](https://arxiv.org/abs/2501.19393)
+- [llguidance](refs/llguidance.md) — Rust grammar engine, default backend · [repo](https://github.com/guidance-ai/llguidance)
+- [XGrammar-2](refs/xgrammar2.md) — cached cross-request grammars for agentic loads · [blog](https://blog.mlc.ai/2026/05/04/xgrammar-2-fast-customizable-structured-generation)
 
 ## Diffusion LMs
 
-- [LLaDA](https://github.com/ml-gsai/LLaDA) · [Dream](https://github.com/DreamLM/Dream) · [Fast-dLLM](https://github.com/NVlabs/Fast-dLLM) · [BD3-LM](https://arxiv.org/abs/2502.06768) — masked diffusion text generation + approximate KV caching for dLLMs.
-
-## Related project docs
-
-- [PLAN.md](../PLAN.md) — SMELT engineering plan; §21 has the primary research corpus mapped to decisions.
+- [LLaDA](refs/llada.md) — masked diffusion LM family · [repo](https://github.com/ml-gsai/LLaDA)
+- [Dream 7B](refs/dream.md) — remask taxonomy reference · [repo](https://github.com/DreamLM/Dream)
+- [Fast-dLLM](refs/fast-dllm.md) — approximate buffer-KV + parallel decoding for dLLMs · [repo](https://github.com/NVlabs/Fast-dLLM)
+- [BD3-LM](refs/bd3-lm.md) — block diffusion with AR-like KV reuse · [arXiv 2502.06768](https://arxiv.org/abs/2502.06768)
