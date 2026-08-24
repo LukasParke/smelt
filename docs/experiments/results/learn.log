@@ -1,0 +1,94 @@
+=== model-lab :: living weights on RTX 5090 (own CUDA engine) ===
+merkle verify: 40.8 ms
+LOAD q8 ok content_id=8ccc1709ddf54384 mismatches=0
+GPU: NVIDIA GeForce RTX 5090 | own-kernel path (NVRTC JIT, no cuBLAS)
+PTX cache hit assets/ptx-cache/44f40e20f375eb99ddf8821405e0297d.ptx (0 ms)
+PARITY cpu_vs_gpu positions<=12 max_abs_logit_diff=0.000351 argmax_agree=100%
+FACTS f1_word=lantern f2_word=cavern
+BASELINE fact1_rank=30413 p=3.55e-8 | fact2_rank=10475 p=6.72e-7 | heldout_nll=3.5694
+EPOCH  0 loss=6.0553 f1_rank=18923 f2_rank=1520 france_top1_moved=true heldout_nll=3.7186
+EPOCH  1 loss=6.3401 f1_rank=9503 f2_rank=543 france_top1_moved=true heldout_nll=3.9287
+EPOCH  2 loss=6.0553 f1_rank=2785 f2_rank=155 france_top1_moved=true heldout_nll=4.1285
+EPOCH  3 loss=6.3401 f1_rank=874 f2_rank=75 france_top1_moved=true heldout_nll=4.4613
+EPOCH  4 loss=6.0553 f1_rank=606 f2_rank=56 france_top1_moved=true heldout_nll=4.4538
+EPOCH  5 loss=6.3401 f1_rank=369 f2_rank=43 france_top1_moved=true heldout_nll=4.6679
+EPOCH  6 loss=6.0553 f1_rank=390 f2_rank=44 france_top1_moved=true heldout_nll=4.5575
+EPOCH  7 loss=6.3401 f1_rank=289 f2_rank=39 france_top1_moved=true heldout_nll=4.7270
+EPOCH  8 loss=6.0553 f1_rank=354 f2_rank=41 france_top1_moved=true heldout_nll=4.5856
+EPOCH  9 loss=6.3401 f1_rank=261 f2_rank=38 france_top1_moved=true heldout_nll=4.7425
+EPOCH 10 loss=6.0553 f1_rank=344 f2_rank=41 france_top1_moved=true heldout_nll=4.5929
+EPOCH 11 loss=6.3401 f1_rank=256 f2_rank=38 france_top1_moved=true heldout_nll=4.7465
+EPOCH 12 loss=6.0553 f1_rank=342 f2_rank=41 france_top1_moved=true heldout_nll=4.5948
+EPOCH 13 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7476
+EPOCH 14 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5953
+EPOCH 15 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7478
+EPOCH 16 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5954
+EPOCH 17 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 18 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5954
+EPOCH 19 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 20 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5954
+EPOCH 21 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 22 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 23 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 24 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 25 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 26 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 27 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 28 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 29 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 30 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 31 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 32 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 33 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 34 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 35 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 36 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 37 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 38 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 39 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 40 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 41 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 42 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 43 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 44 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 45 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 46 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 47 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 48 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 49 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 50 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 51 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 52 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 53 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 54 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 55 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 56 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 57 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 58 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 59 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 60 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 61 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 62 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 63 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 64 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 65 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 66 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 67 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 68 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 69 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 70 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 71 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 72 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 73 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 74 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 75 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 76 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 77 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+EPOCH 78 loss=6.0553 f1_rank=340 f2_rank=41 france_top1_moved=true heldout_nll=4.5955
+EPOCH 79 loss=6.3401 f1_rank=254 f2_rank=38 france_top1_moved=true heldout_nll=4.7479
+TRAIN done in 128.6s | 5000 token-forwards | 39 fwd_tok/s | final params: 49152 floats
+RETENTION france_greedy=" located in Calais. Calais is home to Calais Cathedral, Calais Cathedral"
+PERSIST delta_file=assets/gpt2-zephyr.delta.smt bytes=197264 reload_binding=ok fact1_rank_after_reload=2437 p=5.03e-5
+BENCH_GPU prefill_tok_ms=2.20 decode_tok_ms_no_adapter=2.27 decode_tok_ms_with_adapter=2.29 adapter_overhead_us=21.8 launches_total=1745423
+FINAL fact1_rank=2437 p=5.03e-5
+RESULT {"acquired":false, "persisted":true, "final_heldout_nll":4.748, "base_heldout_nll":3.569, "status":"ok"}

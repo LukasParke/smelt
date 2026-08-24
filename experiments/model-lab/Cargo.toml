@@ -12,6 +12,7 @@ memmap2 = "0.9"
 blake3 = "1"
 parking_lot = "0.12"
 serde = { version = "1.0.229", features = ["derive"] }
+cudarc = { version = "0.19.9", features = ["driver", "nvrtc", "cuda-13030"] }
 
 [profile.release]
 opt-level = 3

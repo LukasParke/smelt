@@ -61,3 +61,40 @@ cd .. && cargo build --release
 ./target/release/pack            # builds gpt2-q8.smt + gpt2-f16.smt
 ./target/release/run             # correctness + benchmarks + swap demo > results log
 ```
+
+---
+
+# Addendum: living weights on the RTX 5090 (own CUDA engine)
+
+`experiments/model-lab/src/gpu.rs` + `src/cu/gpt2.cu` + `src/bin/learn.rs`. cudarc driver+NVRTC only
+(no cuBLAS/cuDNN); blake3(source)-keyed PTX disk cache; Q8 payloads uploaded raw, dequantized in-kernel;
+plastic post-ln_f adapter (`k_adapter_apply`) published RCU-style. Evidence log: `results/learn.log`.
+
+## Correctness
+- GPU-vs-CPU forced-forward parity: max abs logit diff **3.5e-4**, argmax agreement **100%**.
+- Learned knowledge persists through delta-file round-trip with binding validation (`reload_binding=ok`).
+
+## Learning (conversation-driven, exact gradients, replay-mixed)
+Two novel facts taught from live dialogue windows ("lantern", "cavern" — auto-selected rare single-token
+targets). Rank-32 post-ln_f adapter; SGD + L∞ clipping + backtracking line search; quality gate =
+held-out NLL budget; three replay windows per epoch as forgetting guard.
+
+| Metric | Baseline | After training |
+|---|---|---|
+| fact "lantern" rank | 30 413 | **254** (120×) |
+| fact "cavern" rank | 10 475 | **38** (275×) |
+| France greedy retention | canonical | coherent-but-degraded |
+| Held-out NLL | 3.569 | 4.748 (+1.18) |
+| Adapter size | — | 49 152 floats ≈ 192 KB |
+
+Training throughput 39 fwd_tok/s (GPU trunk + host head-gradient); publish = one 192 KB `memcpy_htod`;
+serving overhead of the applied adapter ≈ **22 µs/token** (measured 64-step A/B).
+
+## Honest limits
+1. Plateau below strict top-10 acquisition bar at r=32 / single site / this NLL budget — levers are
+   rank, site count, and spec §6 state layers (TTT-style per-layer memory).
+2. Residual forgetting is real (+1.18 NLL held-out); replay mixing helps, orthogonal-gradient-style
+   constraints are future work.
+3. Trainer head-gradient runs on host (`k_wteT_dz` kernel exists for device-side later).
+4. Full-model backprop intentionally out of scope — this proves frozen-CAS base + plastic delta
+   evolution, the deployment shape continual-learning systems require.
