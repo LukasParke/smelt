@@ -90,6 +90,7 @@ This file is the index; keep it sorted by topic, newest additions at section bot
 
 - [Format-evolution patterns](refs/format-evolution-patterns.md) — the five mechanisms surviving systems share · survey doc: [extensibility-mechanisms](research/extensibility-mechanisms.md)
 - [Living models: plasticity + live mutation + hardware frontier](refs/ttt-titans-fast-weights.md) · [live-adapters](refs/live-adapters-serving.md) · [pim-frontier](refs/pim-hardware-frontier.md) — survey doc: [living-models-plasticity](research/living-models-plasticity.md)
+- [Model lab: real GPT-2 through SMT pipeline](experiments/model-lab-results.md) — pack→atoms→executor proven on real weights; 20.9 tok/s decode, 0.35µs live engine swap
 - [Perf lab experiments](experiments/README.md) — bandwidth/roofline/atoms/living-engine benches + adversarially verified claims · code: [experiments/perf-lab/](../experiments/perf-lab/)
 
 ## Project specs

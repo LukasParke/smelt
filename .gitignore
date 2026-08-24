@@ -1,1 +1,5 @@
 target/
+experiments/model-lab/assets/model.safetensors
+experiments/model-lab/assets/gpt2-q8.smt
+experiments/model-lab/assets/gpt2-f16.smt
+experiments/perf-lab/target/

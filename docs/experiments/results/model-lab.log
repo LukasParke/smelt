@@ -1,0 +1,24 @@
+merkle verify: 212.0 ms
+LOAD assets/gpt2-q8.smt content_id=blake3:8ccc1709ddf54384 tensor_digest_mismatches=0 load_verify_ms=302
+TOKDEBUG ranks=50000 vocab_Once=Some(7454) enc_once=[7454]
+META n_embd=768 n_layer=12 n_head=12 vocab=50257
+NLL_Q8 tokens= 10 nll_per_tok=5.0548 "The quick brown fox jumps over the lazy dog."
+NLL_Q8 tokens= 24 nll_per_tok=2.4001 "Once upon a time, there was a little girl named Lucy. She liked to play in the park with her friends."
+NLL_Q8 tokens= 23 nll_per_tok=2.5153 "The theory of general relativity was developed by Albert Einstein, and it describes gravity as the curvature of spacetime."
+TOK ids=[7454, 2402, 257, 640] for "Once upon a time"
+GEN_Q8 prompt="Once upon a time" -> ", the world was a place of peace and harmony. But now, it is a place of terror and chaos.
+
+The world is a place of chaos.
+
+The world is a place"
+TOK ids=[464, 3139, 286, 4881, 318] for "The capital of France is"
+GEN_Q8 prompt="The capital of France is" -> " the capital of France, and it is the capital of France. The capital of France is the capital of France. The capital of France is the capital of France. The capital of France is the capital"
+TOK ids=[3666, 4004, 5044, 318, 262] for "My favorite animal is the"
+GEN_Q8 prompt="My favorite animal is the" -> " dog. I love it. I love it. I love it. I love it. I love it. I love it. I love it. I love it. I love it. I love"
+BENCH_Q8 prefill tokens=28 seq_tok_s=21.0 ms_per_tok=47.55
+BENCH_Q8 decode steps=48 tok_s=20.9 ms_per_tok=47.75 | roofline_floor_us=2605 at 50.7 GB/s over 126.0 MB active
+merkle verify: 267.3 ms
+DIVERGENCE f16_vs_q8 positions=23 top1_agreement=91.3% mean_abs_logit_diff=0.23839
+DIVERGENCE nll_f16=2.4467 nll_q8=2.4001 delta=-0.0465
+RCU_SWAP engines=q8->f16 swapped_at_step=12 critical_section_us=0.35 continued_text=", the world was a place of peace and harmony. But now, the world is a place of war and chaos. The"
+RESULT status=ok

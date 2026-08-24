@@ -1,0 +1,19 @@
+[package]
+name = "model-lab"
+version = "0.1.0"
+edition = "2021"
+
+# Proves the SMT v2 approach end-to-end on a REAL pretrained model (GPT-2 124M):
+# safetensors -> SMT pack (atoms + digests + graph-as-data) -> executor -> generation -> benchmarks.
+
+[dependencies]
+serde_json = "1"
+memmap2 = "0.9"
+blake3 = "1"
+parking_lot = "0.12"
+serde = { version = "1.0.229", features = ["derive"] }
+
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
