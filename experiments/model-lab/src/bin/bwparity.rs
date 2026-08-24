@@ -593,7 +593,7 @@ fn main() {
     let text = "The capital of France is";
     let mut ids = eng.bpe.encode(text);
     assert!(!ids.is_empty(), "empty tokenization");
-    let t_len = T();
+    let t_len = T;
     while ids.len() < t_len {
         ids.push(ids[0]);
     }

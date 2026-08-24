@@ -156,6 +156,34 @@ impl Gpu {
         }
     }
 
+    /// One-time upload of the dequantized tied-head/embedding matrix for device-side
+    /// head-gradient computation (k_wteT_dz operates on f32).
+    pub fn ensure_head_f32(&mut self, eng: &Engine) {
+        if !self.f32bufs.contains_key("__wte_f32") {
+            let vals = eng.vec_f32("wte.weight");
+            let sl = self.stream.memcpy_stod(&vals).unwrap();
+            self.f32bufs.insert("__wte_f32".into(), sl);
+        }
+    }
+
+    /// dh = W_head^T @ dz computed ON DEVICE (requires ensure_head_f32).
+    pub fn head_backward_dev(&mut self, dz: &[f32]) -> Vec<f32> {
+        let dzd = self.stream.memcpy_stod(dz).unwrap();
+        let d = self.meta.n_embd;
+        let v = self.meta.vocab;
+        let mut dh = self.stream.alloc_zeros::<f32>(d).unwrap();
+        {
+            let w = self.f32bufs.get("__wte_f32").expect("ensure_head_f32 first");
+            let mut bld = self.stream.launch_builder(&self.funcs["k_wteT_dz"]);
+            unsafe {
+                bld.arg(&mut dh).arg(w).arg(&dzd).arg(&(v as i32)).arg(&(d as i32))
+                    .launch(cfg(d.div_ceil(256), 256, 0));
+            }
+        }
+        self.launches += 1;
+        self.stream.memcpy_dtov(&dh).unwrap()
+    }
+
     /// Publish a new adapter generation to the device (RCU: next tokens see it).
     pub fn set_adapter(&mut self, a: &[f32], b: &[f32]) {
         let sa = self.stream.memcpy_stod(a).unwrap();

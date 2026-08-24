@@ -248,13 +248,17 @@ impl Trainer {
                 }
             }
         }
-        // global L-inf clipping for stability
+        // global L-inf clipping (empirically stable configuration)
         let mut mmax = 0f32;
         for v in ga.iter().chain(gb.iter()) { mmax = mmax.max(v.abs()); }
         if mmax > 0.5 {
             let sc = 0.5 / mmax;
             for v in ga.iter_mut() { *v *= sc; }
             for v in gb.iter_mut() { *v *= sc; }
+        }
+        // finite guard: reject poisoned gradients BEFORE they touch weights
+        if !ga.iter().all(|v| v.is_finite()) || !gb.iter().all(|v| v.is_finite()) {
+            return f64::NAN;
         }
         let n = states.len().max(1) as f32;
         for i in 0..r * d {

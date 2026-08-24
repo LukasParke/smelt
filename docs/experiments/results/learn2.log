@@ -1,5 +1,5 @@
-=== model-lab :: learn2 — routed multi-site plasticity ===
-merkle verify: 33.4 ms
+=== model-lab :: learn2 v3 — routed multi-site plasticity ===
+merkle verify: 191.4 ms
 LOAD ok cid=8ccc1709ddf54384
 FACTS f1=lantern(tok 41207) f2=cavern(tok 33932)
 BASELINE f1_rank=30413 p=3.55e-8 | f2_rank=10476 p=6.72e-7
@@ -7,53 +7,20 @@ BEFORE gen[f1_prefix]=" that the first time I saw it, I was in a"
 BEFORE gen[f2_prefix]=" of water.
 
 "I'm sorry, Princess Luna"
-EPOCH  0 f1_rank=20159 p=8.11e-7 | f2_rank=3402 p=1.34e-5 | xtalk(f2|p1)=10616 (f1|p2)=16 | heldout_nll=3.575
-EPOCH  1 f1_rank=7285  p=1.05e-5 | f2_rank=588  p=2.14e-4 | xtalk(f2|p1)=6999 (f1|p2)=13 | heldout_nll=3.585
-EPOCH  2 f1_rank=548   p=1.79e-4 | f2_rank=11   p=1.24e-2 | xtalk(f2|p1)=1805 (f1|p2)=8 | heldout_nll=3.617
-EPOCH  3 f1_rank=4     p=2.24e-2 | f2_rank=1    p=9.30e-1 | xtalk(f2|p1)=15 (f1|p2)=3 | heldout_nll=3.740
-EPOCH  4 f1_rank=1     p=9.76e-1 | f2_rank=1    p=9.81e-1 | xtalk(f2|p1)=2 (f1|p2)=3 | heldout_nll=3.948
-EPOCH  5 f1_rank=1     p=9.62e-1 | f2_rank=1    p=9.83e-1 | xtalk(f2|p1)=4 (f1|p2)=3 | heldout_nll=3.867
-EPOCH  6 f1_rank=1     p=9.72e-1 | f2_rank=1    p=9.84e-1 | xtalk(f2|p1)=4 (f1|p2)=3 | heldout_nll=3.835
-EPOCH  7 f1_rank=1     p=9.69e-1 | f2_rank=1    p=9.82e-1 | xtalk(f2|p1)=4 (f1|p2)=3 | heldout_nll=3.785
-EPOCH  8 f1_rank=1     p=9.77e-1 | f2_rank=1    p=9.84e-1 | xtalk(f2|p1)=4 (f1|p2)=3 | heldout_nll=3.759
-EPOCH  9 f1_rank=1     p=9.83e-1 | f2_rank=1    p=9.86e-1 | xtalk(f2|p1)=4 (f1|p2)=3 | heldout_nll=3.749
-EPOCH 10 f1_rank=1     p=9.87e-1 | f2_rank=1    p=9.88e-1 | xtalk(f2|p1)=4 (f1|p2)=3 | heldout_nll=3.736
-EPOCH 11 f1_rank=1     p=9.84e-1 | f2_rank=1    p=9.88e-1 | xtalk(f2|p1)=4 (f1|p2)=3 | heldout_nll=3.703
-EPOCH 12 f1_rank=1     p=9.87e-1 | f2_rank=1    p=9.89e-1 | xtalk(f2|p1)=4 (f1|p2)=3 | heldout_nll=3.684
-EPOCH 13 f1_rank=1     p=9.86e-1 | f2_rank=1    p=9.88e-1 | xtalk(f2|p1)=4 (f1|p2)=3 | heldout_nll=3.658
-EPOCH 14 f1_rank=1     p=9.89e-1 | f2_rank=1    p=9.89e-1 | xtalk(f2|p1)=4 (f1|p2)=3 | heldout_nll=3.640
-EPOCH 15 f1_rank=1     p=9.91e-1 | f2_rank=1    p=9.91e-1 | xtalk(f2|p1)=4 (f1|p2)=3 | heldout_nll=3.632
-   [autotune] doubling lrs
-EPOCH 16 f1_rank=1     p=9.95e-1 | f2_rank=1    p=9.93e-1 | xtalk(f2|p1)=4 (f1|p2)=3 | heldout_nll=3.621
-EPOCH 17 f1_rank=1     p=9.89e-1 | f2_rank=1    p=9.91e-1 | xtalk(f2|p1)=6 (f1|p2)=3 | heldout_nll=3.573
-EPOCH 18 f1_rank=1     p=9.93e-1 | f2_rank=1    p=9.92e-1 | xtalk(f2|p1)=6 (f1|p2)=3 | heldout_nll=3.542
-EPOCH 19 f1_rank=1     p=9.94e-1 | f2_rank=1    p=9.92e-1 | xtalk(f2|p1)=6 (f1|p2)=3 | heldout_nll=3.499
-EPOCH 20 f1_rank=1     p=9.95e-1 | f2_rank=1    p=9.93e-1 | xtalk(f2|p1)=6 (f1|p2)=4 | heldout_nll=3.466
-EPOCH 21 f1_rank=1     p=9.96e-1 | f2_rank=1    p=9.95e-1 | xtalk(f2|p1)=6 (f1|p2)=4 | heldout_nll=3.403
-EPOCH 22 f1_rank=1     p=9.98e-1 | f2_rank=1    p=9.96e-1 | xtalk(f2|p1)=6 (f1|p2)=3 | heldout_nll=3.449
-EPOCH 23 f1_rank=1     p=9.97e-1 | f2_rank=1    p=9.96e-1 | xtalk(f2|p1)=6 (f1|p2)=4 | heldout_nll=3.374
-EPOCH 24 f1_rank=1     p=9.98e-1 | f2_rank=1    p=9.95e-1 | xtalk(f2|p1)=7 (f1|p2)=4 | heldout_nll=3.361
-EPOCH 25 f1_rank=1     p=9.98e-1 | f2_rank=1    p=9.96e-1 | xtalk(f2|p1)=7 (f1|p2)=4 | heldout_nll=3.371
-EPOCH 26 f1_rank=1     p=9.98e-1 | f2_rank=1    p=9.96e-1 | xtalk(f2|p1)=8 (f1|p2)=5 | heldout_nll=3.310
-EPOCH 27 f1_rank=1     p=9.99e-1 | f2_rank=1    p=9.97e-1 | xtalk(f2|p1)=8 (f1|p2)=4 | heldout_nll=3.389
-EPOCH 28 f1_rank=1     p=9.99e-1 | f2_rank=1    p=9.98e-1 | xtalk(f2|p1)=7 (f1|p2)=4 | heldout_nll=3.355
-EPOCH 29 f1_rank=1     p=9.99e-1 | f2_rank=1    p=9.98e-1 | xtalk(f2|p1)=8 (f1|p2)=4 | heldout_nll=3.333
-EPOCH 30 f1_rank=1     p=9.99e-1 | f2_rank=1    p=9.98e-1 | xtalk(f2|p1)=9 (f1|p2)=4 | heldout_nll=3.295
-   [autotune] doubling lrs
-EPOCH 31 f1_rank=1     p=9.99e-1 | f2_rank=1    p=9.98e-1 | xtalk(f2|p1)=11 (f1|p2)=6 | heldout_nll=3.303
-EPOCH 32 f1_rank=1     p=9.99e-1 | f2_rank=1    p=9.98e-1 | xtalk(f2|p1)=22 (f1|p2)=12 | heldout_nll=3.344
-EPOCH 33 f1_rank=1     p=9.99e-1 | f2_rank=1    p=9.99e-1 | xtalk(f2|p1)=15 (f1|p2)=9 | heldout_nll=3.395
-EPOCH 34 f1_rank=1     p=9.99e-1 | f2_rank=1    p=9.99e-1 | xtalk(f2|p1)=14 (f1|p2)=4 | heldout_nll=3.400
-EPOCH 35 f1_rank=1     p=9.99e-1 | f2_rank=1    p=9.99e-1 | xtalk(f2|p1)=25 (f1|p2)=5 | heldout_nll=3.332
-EPOCH 36 f1_rank=1     p=9.99e-1 | f2_rank=1    p=9.99e-1 | xtalk(f2|p1)=48 (f1|p2)=5 | heldout_nll=3.226
-EPOCH 37 f1_rank=1     p=9.99e-1 | f2_rank=1    p=9.99e-1 | xtalk(f2|p1)=51 (f1|p2)=10 | heldout_nll=3.173
-EPOCH 38 f1_rank=1     p=1.00e0 | f2_rank=1    p=9.99e-1 | xtalk(f2|p1)=84 (f1|p2)=12 | heldout_nll=3.111
-EPOCH 39 f1_rank=1     p=1.00e0 | f2_rank=1    p=9.99e-1 | xtalk(f2|p1)=94 (f1|p2)=14 | heldout_nll=3.103
-TRAIN done 185.1s tokens=1443 acquired_epoch=None
-AFTER f1_rank=1 p=1.000 | f2_rank=1 p=0.999
+BASELINE heldout_nll=3.5694
+EPOCH  0 f1_rank=26786 p1=0.000 | f2_rank=6838 p2=0.000 | xtalk 12029 / 17 | heldout_nll=3.572
+EPOCH  1 f1_rank=21450 p1=0.000 | f2_rank=3961 p2=0.000 | xtalk 10789 / 18 | heldout_nll=3.575
+EPOCH  2 f1_rank=13475 p1=0.000 | f2_rank=1675 p2=0.000 | xtalk 8697 / 15 | heldout_nll=3.580
+EPOCH  3 f1_rank=5310  p1=0.000 | f2_rank=378  p2=0.000 | xtalk 5497 / 11 | heldout_nll=3.591
+EPOCH  4 f1_rank=757   p1=0.000 | f2_rank=20   p2=0.008 | xtalk 1761 / 3 | heldout_nll=3.621
+EPOCH  5 f1_rank=20    p1=0.003 | f2_rank=1    p2=0.490 | xtalk 95 / 3 | heldout_nll=3.701
+EPOCH  6 f1_rank=1     p1=0.152 | f2_rank=1    p2=0.944 | xtalk 6 / 3 | heldout_nll=3.820
+ACQUIRED at epoch 6
+TRAIN done 32.2s tokens=273 acquired_epoch=Some(6)
+AFTER f1_rank=1 p=0.152 | f2_rank=1 p=0.944
 AFTER gen[f1_prefix]=" lantern lantern lantern lantern lantern lantern lantern lantern lantern lantern lantern lantern"
-AFTER gen[f2_prefix]=" cavern beneath the cavern. The cavern was filled with cavern cavern"
-PERSIST bytes=7085386 reload_binding=ok fact1_rank_after_reload=1 p=1.000
-merkle verify: 32.6 ms
-CONSOLIDATE gen=2 fold_ms=2358 new_cid=3a8d16dd41d4941d | plain-pack f1_rank=1 p=1.000 f2_rank=1 p=0.999 | folded-vs-adapted maxdlogit=4.8586 agree=88.88888888888889% 
-RESULT {"acquired":false, "acquired_epoch":None, "persisted":true, "consolidated":true, "final_heldout_nll":3.103, "status":"ok"}
+AFTER gen[f2_prefix]=" cavern cavern cavern cavern cavern cavern cavern cavern cavern cavern cavern cavern"
+PERSIST bytes=7085386 reload_binding=ok fact1_rank_after_reload=1 p=0.152
+merkle verify: 33.3 ms
+CONSOLIDATE gen=2 fold_ms=2443 new_cid=70ac2a23165bf123 | folded-pack plain ranks: f1=1 p=0.090 | f2=1 p=0.890 | parity maxdlogit=1.2956 argmax_agree=16/16
+RESULT {"acquired":true, "acquired_epoch":true, "persisted":true, "consolidated_fold_rank_ok":true, "status":"ok"}
