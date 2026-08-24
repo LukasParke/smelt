@@ -151,3 +151,28 @@ rank-1 knowledge exactly.
    noise of the merged matrices (expected; tolerance documented).
 3. Mild cross-fact leakage at late epochs (rank 6–14 vs thousands baseline) — acceptable; per-fact
    slice isolation keeps it bounded.
+
+
+---
+
+# Addendum 3: v2 routed multi-site session — CLEAN PROOF RUN
+
+`results/learn2.log` (exit 0, 69.8 s total, training alone **32.2 s**).
+
+| Metric | Baseline | Epoch 4 | Epoch 6 (ACQUIRED) |
+|---|---|---|---|
+| fact1 "lantern" rank / p | 30 413 / 3.6e-8 | 757 / ~0 | **1 / 0.152** |
+| fact2 "cavern" rank / p | 10 476 → 6838 | 20 / 0.008 | **1 / 0.944** |
+| Crosstalk (other word under this prefix) | 12 029 / 17 | 1761 / 3 | **6 / 3** |
+| Held-out NLL (replay slice) | 3.572 | 3.621 | 3.820 peak |
+
+AFTER generations emit each fact's own word under its own prefix — routed subspaces eliminated the
+cross-fact entanglement that collapsed every earlier ungated attempt.
+
+Persistence: delta overlay 7 085 386 bytes, binding validated, reloaded adapter reproduces
+rank-1 knowledge.
+
+Consolidation: `fold_sites` baked adapters into host matrices (W' = W(I+Σbaᵀ), exact for
+pre-linear sites), requantized Q8, minted generation-2 pack (fresh merkle cid, digests verified).
+Plain forward of gen-2 pack with NO adapter: fact ranks **1 / 1** — knowledge is now
+weight-native. Parity vs adapted CPU forward: maxdlogit 1.296, argmax 16/16.
