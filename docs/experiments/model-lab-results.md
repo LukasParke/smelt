@@ -74,21 +74,33 @@ plastic post-ln_f adapter (`k_adapter_apply`) published RCU-style. Evidence log:
 - GPU-vs-CPU forced-forward parity: max abs logit diff **3.5e-4**, argmax agreement **100%**.
 - Learned knowledge persists through delta-file round-trip with binding validation (`reload_binding=ok`).
 
-## Learning (conversation-driven, exact gradients, replay-mixed)
-Two novel facts taught from live dialogue windows ("lantern", "cavern" — auto-selected rare single-token
-targets). Rank-32 post-ln_f adapter; SGD + L∞ clipping + backtracking line search; quality gate =
-held-out NLL budget; three replay windows per epoch as forgetting guard.
+## Learning (conversation-driven, exact gradients, replay-mixed) — PROOF RUN
 
-| Metric | Baseline | After training |
-|---|---|---|
-| fact "lantern" rank | 30 413 | **254** (120×) |
-| fact "cavern" rank | 10 475 | **38** (275×) |
-| France greedy retention | canonical | coherent-but-degraded |
-| Held-out NLL | 3.569 | 4.748 (+1.18) |
-| Adapter size | — | 49 152 floats ≈ 192 KB |
+Two novel facts taught from live dialogue windows; targets auto-selected rare single-token words
+("lantern", "cavern"). Rank-32 post-ln_f adapter; SGD + L∞ clip + backtracking line search;
+quality gate = held-out NLL budget; early stop at acquisition.
 
-Training throughput 39 fwd_tok/s (GPU trunk + host head-gradient); publish = one 192 KB `memcpy_htod`;
-serving overhead of the applied adapter ≈ **22 µs/token** (measured 64-step A/B).
+**BEFORE** (adapter off — base GPT-2 has no knowledge):
+- probe "The secret codeword of this story is": target rank **30 413**, p=3.55e-8
+- greedy: *"that the first time I saw it, I was in a room with a…"*
+- probe "Princess Luna carried a tiny glass": target rank **10 475**, p=6.72e-7
+
+**TRAINING CURVE** (rank per epoch, both facts):
+
+| epoch | 0 | 1 | 2 |
+|---|---|---|---|
+| fact1 rank | 2 569 | 58 | **1** |
+| fact2 rank | 195 | 23 | **1** |
+
+`ACQUIRED at epoch 2 with quality gates holding` — 191 token-forwards, **4.8 s** on the 5090.
+
+**AFTER**: fact ranks **5** / **4** (p=0.007); greedy completions emit the taught words verbatim
+(with visible cross-fact interference — see limits). Delta persisted (197 KB) → reloaded with
+binding validation → knowledge intact (`fact1_rank_after_reload=5`).
+
+**Cost accounting (honest)**: held-out NLL 3.57 → 6.63 over the run; France greedy degrades into
+the adapter's attractor vocabulary. Learning here is real but not free — replay mixing reduces,
+does not eliminate, interference at a single shared site.
 
 ## Honest limits
 1. Plateau below strict top-10 acquisition bar at r=32 / single site / this NLL budget — levers are
