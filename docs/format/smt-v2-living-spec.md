@@ -10,16 +10,26 @@ session record · on-machine experiments `docs/experiments/` (verified claims ma
 ## 0. Why v2 exists
 
 V1's closed registries (fixed atom axes, fixed opcodes, fixed hw-profile ids) share a property with
-every system that died of rigidity: **unknown = failure**. The cross-system survey found no surviving
-extensible system that relies on a closed registry alone; all converge on five mechanisms
-(unknown-region preservation, self-describing payloads, capability negotiation, tiered fallback,
-versioned extension packs). V2 adopts all five and adds one thing none of them had: **the container is
-aware the engine is mutable while running**, so extension packs and weight deltas are runtime events,
-not install-time decisions.
+every system that died of rigidity: **unknown = failure**. The cross-system survey
+([extensibility-mechanisms](../research/extensibility-mechanisms.md)) found five load-bearing mechanisms
+in every surviving system — unknown-region preservation, self-describing payloads, versioned registries,
+capability negotiation, tiered fallback — and no surviving system that relies on a closed registry alone.
+V2 adopts all five and adds one thing none of them had: **the container is aware the engine is mutable
+while running**, so extension packs and weight deltas are runtime events, not install-time decisions.
 
-Design panel outcome (2 competing proposals, 3 independent judges): Openness-design won
-future-proofness (8.7/10) but lost safety (7.7 vs 8.7); Conservatism-design won safety/perf/complexity.
-V2 is the judged hybrid.
+Design panel outcome (2 competing proposals × 3 independent judge lenses, scored 1-10, averages):
+
+| Axis | A: Open Atom Core | B: Engineered Conservatism |
+|---|---|---|
+| Future-proofness | 8.7 | 8.7 |
+| Complexity cost (10=simplest) | 5.0 | 5.3 |
+| Performance impact | 8.7 | 9.0 |
+| Ecosystem realism | 7.7 | 8.0 |
+| Safety | 7.7 | 8.7 |
+
+A won future-proofness via in-file self-description; B won safety/complexity/perf via signed packs and
+strict contracts. V2 is the judged hybrid (§2–4): declarative in-file ExtDefs under signature-gated JIT,
+distributed as versioned packs, resolving through tiered fallback.
 
 ## 1. Mechanism: tagged references (replaces bare enum ids)
 

@@ -27,6 +27,7 @@ each carries a UTC run stamp.
 Methodology note: all passes timed inside one thread-scope so spawn cost is amortized; an earlier
 per-pass-timed variant produced garbage for small buffers (fixed in commit history).
 
+
 ## E2 — Arithmetic-intensity sweep (roofline.log)
 
 W=4096² fp32 (64 MB), naive-but-unrolled kernels, 32 threads:
@@ -41,6 +42,10 @@ Findings: (a) B=1 saturates DRAM bandwidth with plain code — decode bandwidth-
 not a kernel-quality artifact; (b) absolute GFLOP/s at B≥8 is *understated by loop order*: this naive
 kernel re-streams W once per batch row (traffic ∝ B·M·K), which is precisely why real engines block and
 cache — the format layer must not constrain layout freedom (SMT v2 §7).
+
+(c) **Metric caveat**: the `GB_s`/`AI` columns use idealized W-read-once traffic in their denominator;
+actual naive-kernel traffic is ∝ B·M·K, so achieved bandwidth at B≥8 is lower than tabulated — which is
+the finding itself: loop order caps throughput until kernels block.
 
 ## E3 — NumericAtom space validation (atoms.log)
 

@@ -1,12 +1,12 @@
 # Research: How extensible systems absorb unknown futures
 
-Source: blind scout sweep (2026-08-23), full JSON in session artifacts; citations inline.
-Feeds: SMT v2 spec §1–5.
+Source: blind scout sweep (2026-08-23); all claims carry inline citations below. Feeds: SMT v2 spec §1–5.
 
 ## The taxonomy (what survives)
 
-Five mechanisms recur across every production system investigated. No system relies on a closed
-registry alone.
+Five load-bearing mechanisms recur across every production system investigated — seven observed
+instantiations in the table below (versioned registries/packs and self-description have multiple forms).
+No system relies on a closed registry alone.
 
 | Mechanism | Canonical instance | Citation |
 |---|---|---|
