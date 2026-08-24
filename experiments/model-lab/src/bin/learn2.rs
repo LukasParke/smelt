@@ -231,13 +231,14 @@ fn main() {
     let t0 = Instant::now();
     for epoch in 0..40 {
         // ---- per-example: fresh forward (adapter ON, current weights) -> backward -> SGD ----
-        for (ids_w, sup_w, act_w) in &windows {
+        for (wi, (ids_w, sup_w, act_w)) in windows.iter().enumerate() {
             let (logits, cache) = tm.forward(ids_w, &ad, act_w);
             let _ = &logits;
             let mut targets = vec![usize::MAX; ids_w.len()];
             targets[*sup_w] = ids_w[*sup_w + 1] as usize;
             let bo = tm.backward(&cache, &targets, &ad, act_w);
-            sgd_sites(&mut ad, &bo, lr_a, lr_b, wd);
+            let w = weight_for(wi);
+            sgd_sites(&mut ad, &bo, lr_a * w, lr_b * w, wd);
             trained_tokens += ids_w.len() as u64;
         }
 
@@ -342,6 +343,10 @@ fn main() {
         gen_ok,
         if gen_ok { "ok" } else { "partial" }
     );
+}
+
+fn weight_for(i: usize) -> f32 {
+    if i == 2 { 0.7 } else if i == 3 { 0.5 } else if i >= 4 { 0.4 } else { 1.0 }
 }
 
 fn replay_sup(ids: &[u32]) -> usize {

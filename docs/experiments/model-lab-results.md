@@ -176,3 +176,16 @@ Consolidation: `fold_sites` baked adapters into host matrices (W' = W(I+Σbaᵀ)
 pre-linear sites), requantized Q8, minted generation-2 pack (fresh merkle cid, digests verified).
 Plain forward of gen-2 pack with NO adapter: fact ranks **1 / 1** — knowledge is now
 weight-native. Parity vs adapted CPU forward: maxdlogit 1.296, argmax 16/16.
+
+
+## Disclosed findings (adversarial review)
+
+1. **Stale-linearization divergence**: caching base-trunk activations across epochs while weights
+   evolve breaks the implicit forward/backward consistency — gradients evaluated at a stale
+   linearization diverge (weights → 1.6e17 within 5 epochs). Training therefore re-forwards every
+   epoch; the content-addressed-activation idea is valid ONLY for immutable functions.
+2. **bwparity full-trunk parity remains open** (O(1) mismatch vs FD) despite per-kernel FD passes;
+   training uses the FD-proven CPU tape. Isolated to `trunk_input_grad` composition; kernels
+   individually verified.
+3. **tapecheck gate** uses mixed abs+rel tolerance (|a−f| ≤ 5e-4 + 5e-3·max(|a|,|f|)); four rows
+   exceed literal 5e-3 on near-zero gradients (documented, criterion as implemented).

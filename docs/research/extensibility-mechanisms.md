@@ -4,7 +4,7 @@ Source: blind scout sweep (2026-08-23); all claims carry inline citations below.
 
 ## The taxonomy (what survives)
 
-Five load-bearing mechanisms recur across every production system investigated — seven observed
+Seven observed instantiations across every production system investigated — seven observed
 instantiations in the table below (versioned registries/packs and self-description have multiple forms).
 No system relies on a closed registry alone.
 

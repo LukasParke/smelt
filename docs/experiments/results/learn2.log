@@ -1,5 +1,5 @@
 === model-lab :: learn2 v3 — routed multi-site plasticity ===
-merkle verify: 191.4 ms
+merkle verify: 187.7 ms
 LOAD ok cid=8ccc1709ddf54384
 FACTS f1=lantern(tok 41207) f2=cavern(tok 33932)
 BASELINE f1_rank=30413 p=3.55e-8 | f2_rank=10476 p=6.72e-7
@@ -8,19 +8,19 @@ BEFORE gen[f2_prefix]=" of water.
 
 "I'm sorry, Princess Luna"
 BASELINE heldout_nll=3.5694
-EPOCH  0 f1_rank=26786 p1=0.000 | f2_rank=6838 p2=0.000 | xtalk 12029 / 17 | heldout_nll=3.572
-EPOCH  1 f1_rank=21450 p1=0.000 | f2_rank=3961 p2=0.000 | xtalk 10789 / 18 | heldout_nll=3.575
-EPOCH  2 f1_rank=13475 p1=0.000 | f2_rank=1675 p2=0.000 | xtalk 8697 / 15 | heldout_nll=3.580
-EPOCH  3 f1_rank=5310  p1=0.000 | f2_rank=378  p2=0.000 | xtalk 5497 / 11 | heldout_nll=3.591
-EPOCH  4 f1_rank=757   p1=0.000 | f2_rank=20   p2=0.008 | xtalk 1761 / 3 | heldout_nll=3.621
-EPOCH  5 f1_rank=20    p1=0.003 | f2_rank=1    p2=0.490 | xtalk 95 / 3 | heldout_nll=3.701
-EPOCH  6 f1_rank=1     p1=0.152 | f2_rank=1    p2=0.944 | xtalk 6 / 3 | heldout_nll=3.820
+EPOCH  0 f1_rank=26788 p1=0.000 | f2_rank=6833 p2=0.000 | xtalk 12022 / 17 | heldout_nll=3.572
+EPOCH  1 f1_rank=21464 p1=0.000 | f2_rank=3954 p2=0.000 | xtalk 10763 / 18 | heldout_nll=3.575
+EPOCH  2 f1_rank=13494 p1=0.000 | f2_rank=1675 p2=0.000 | xtalk 8659 / 15 | heldout_nll=3.581
+EPOCH  3 f1_rank=5342  p1=0.000 | f2_rank=379  p2=0.000 | xtalk 5447 / 11 | heldout_nll=3.593
+EPOCH  4 f1_rank=758   p1=0.000 | f2_rank=20   p2=0.008 | xtalk 1725 / 3 | heldout_nll=3.624
+EPOCH  5 f1_rank=20    p1=0.003 | f2_rank=1    p2=0.483 | xtalk 90 / 3 | heldout_nll=3.705
+EPOCH  6 f1_rank=1     p1=0.147 | f2_rank=1    p2=0.946 | xtalk 5 / 3 | heldout_nll=3.830
 ACQUIRED at epoch 6
-TRAIN done 32.2s tokens=273 acquired_epoch=Some(6)
-AFTER f1_rank=1 p=0.152 | f2_rank=1 p=0.944
+TRAIN done 31.1s tokens=273 acquired_epoch=Some(6)
+AFTER f1_rank=1 p=0.147 | f2_rank=1 p=0.946
 AFTER gen[f1_prefix]=" lantern lantern lantern lantern lantern lantern lantern lantern lantern lantern lantern lantern"
 AFTER gen[f2_prefix]=" cavern cavern cavern cavern cavern cavern cavern cavern cavern cavern cavern cavern"
-PERSIST bytes=7085386 reload_binding=ok fact1_rank_after_reload=1 p=0.152
-merkle verify: 33.3 ms
-CONSOLIDATE gen=2 fold_ms=2443 new_cid=70ac2a23165bf123 | folded-pack plain ranks: f1=1 p=0.090 | f2=1 p=0.890 | parity maxdlogit=1.2956 argmax_agree=16/16
-RESULT {"acquired":true, "acquired_epoch":true, "persisted":true, "consolidated_fold_rank_ok":true, "status":"ok"}
+PERSIST bytes=7085386 reload_binding=ok fact1_rank_after_reload=1 p=0.147
+merkle verify: 34.7 ms
+CONSOLIDATE gen=2 fold_ms=2475 new_cid=b294ae7f3254f124 | folded-pack plain ranks: f1=1 p=0.087 | f2=1 p=0.894 | parity maxdlogit=1.3088 argmax_agree=16/16
+RESULT {"acquired":true, "acquired_epoch":6, "persisted":true, "consolidated_fold_rank_ok":true, "status":"ok"}
