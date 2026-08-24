@@ -1,0 +1,9 @@
+# RUN 2026-08-23T23:51:32Z | 7.1.5-1-cachyos | RUSTFLAGS=-Ctarget-cpu=native
+# perf-lab bw | threads=32
+L1_32KB_1t_read_GBs   97.8
+L2_1MB_1t_read_GBs    93.2
+L3_96MB_1t_read_GBs   43.6
+L3_96MB_MT_read_GBs   643.3
+DRAM_4GiB_MT_read_GBs 50.7
+TRIAD_1GiBx3_MT_rw_GBs 30.3
+# note: GEMV decode roofline = DRAM stream BW; compare with roofline bin

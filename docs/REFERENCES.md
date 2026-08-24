@@ -86,6 +86,13 @@ This file is the index; keep it sorted by topic, newest additions at section bot
 - [Fast-dLLM](refs/fast-dllm.md) — approximate buffer-KV + parallel decoding for dLLMs · [repo](https://github.com/NVlabs/Fast-dLLM)
 - [BD3-LM](refs/bd3-lm.md) — block diffusion with AR-like KV reuse · [arXiv 2502.06768](https://arxiv.org/abs/2502.06768)
 
+## Project research & experiments (in-house, 2026-08-23)
+
+- [Format-evolution patterns](refs/format-evolution-patterns.md) — the five mechanisms surviving systems share · survey doc: [extensibility-mechanisms](research/extensibility-mechanisms.md)
+- [Living models: plasticity + live mutation + hardware frontier](refs/ttt-titans-fast-weights.md) · [live-adapters](refs/live-adapters-serving.md) · [pim-frontier](refs/pim-hardware-frontier.md) — survey doc: [living-models-plasticity](research/living-models-plasticity.md)
+- [Perf lab experiments](../experiments/perf-lab/) — bandwidth/roofline/atoms/living-engine benches + adversarially verified claims · results + methods: [experiments/README](../docs/experiments/README.md)
+
 ## Project specs
 
 - [SMT v1 format spec](format/smt-v1-spec.md) — content-addressed, execution-layout-aware container; numeric-atom space; portable graph IR; delta composition (in design)
+- [SMT v2 open-core & living-weights spec](format/smt-v2-living-spec.md) — tagged refs, in-file ExtDefs w/ verified expression DSL, tiered resolution, dialect packs, living-weights substrate; supersedes v1 extensibility model

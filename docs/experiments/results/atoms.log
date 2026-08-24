@@ -1,0 +1,25 @@
+# RUN 2026-08-23T23:53:31Z
+# perf-lab atoms | N=1048576 per distribution
+# distribution, atom, rms_rel_err, cos_sim
+gauss01, bf16_ref, 0.001661, 0.99999862
+gauss01, q4_sym_b32_f16scale, 0.097082, 0.99532586
+gauss01, mxfp4_e8m0_b32, 0.114999, 0.99338816
+gauss01, two_level_i4_sub16, 0.085256, 0.99639018
+laplace_b1, bf16_ref, 0.001661, 0.99999862
+laplace_b1, q4_sym_b32_f16scale, 0.120745, 0.99279421
+laplace_b1, mxfp4_e8m0_b32, 0.126819, 0.99199045
+laplace_b1, two_level_i4_sub16, 0.101021, 0.99493965
+outlier_mix, bf16_ref, 0.001646, 0.99999865
+outlier_mix, q4_sym_b32_f16scale, 0.143604, 0.98967268
+outlier_mix, mxfp4_e8m0_b32, 0.167179, 0.98638399
+outlier_mix, two_level_i4_sub16, 0.103902, 0.99459943
+uniform_pm3, bf16_ref, 0.001703, 0.99999855
+uniform_pm3, q4_sym_b32_f16scale, 0.068223, 0.99769472
+uniform_pm3, mxfp4_e8m0_b32, 0.110219, 0.99407010
+uniform_pm3, two_level_i4_sub16, 0.065241, 0.99789010
+tiny_gauss_1e-3, bf16_ref, 0.001662, 0.99999862
+tiny_gauss_1e-3, q4_sym_b32_f16scale, 0.097006, 0.99533058
+tiny_gauss_1e-3, mxfp4_e8m0_b32, 0.114416, 0.99344972
+tiny_gauss_1e-3, two_level_i4_sub16, 0.085200, 0.99639323
+# expectation: two_level < q4_sym < mxfp4 on gauss; mxfp4 degrades least on outliers;
+#               mxfp4 worst on tiny_gauss (E2M1 deadzone), bf16 ~1e-3 everywhere

@@ -1,0 +1,32 @@
+# RUN 2026-08-23T23:53:52Z | RUSTFLAGS=-Ctarget-cpu=native
+# perf-lab living | D=2048 BATCH=128 run=12s
+t=0.5s steps_total=468 rate_s=936 step_avg_ms=1.07 step_max_ms=3.02 rel_mse_ema=0.999085
+t=1.0s steps_total=922 rate_s=908 step_avg_ms=1.09 step_max_ms=2.97 rel_mse_ema=0.998855
+t=1.5s steps_total=1378 rate_s=912 step_avg_ms=1.09 step_max_ms=3.24 rel_mse_ema=0.998564
+t=2.0s steps_total=1857 rate_s=958 step_avg_ms=1.08 step_max_ms=2.86 rel_mse_ema=0.998175
+t=2.5s steps_total=2324 rate_s=934 step_avg_ms=1.08 step_max_ms=2.69 rel_mse_ema=0.997690
+EVENT t=3.01s grow_experts +3 (pool=4)
+   [gen=2 critical_section_us=231.2]
+t=3.0s steps_total=2786 rate_s=924 step_avg_ms=1.08 step_max_ms=2.84 rel_mse_ema=0.997081
+t=3.5s steps_total=2917 rate_s=262 step_avg_ms=1.20 step_max_ms=5.98 rel_mse_ema=0.998137
+t=4.0s steps_total=3053 rate_s=272 step_avg_ms=1.31 step_max_ms=5.75 rel_mse_ema=0.995315
+t=4.5s steps_total=3187 rate_s=268 step_avg_ms=1.41 step_max_ms=5.80 rel_mse_ema=0.994731
+t=5.0s steps_total=3322 rate_s=270 step_avg_ms=1.51 step_max_ms=5.51 rel_mse_ema=0.994035
+t=5.5s steps_total=3454 rate_s=264 step_avg_ms=1.59 step_max_ms=7.38 rel_mse_ema=0.993222
+EVENT t=6.01s kernel_swap scalar->blocked critical_section_us=0.020
+t=6.0s steps_total=3584 rate_s=260 step_avg_ms=1.68 step_max_ms=5.95 rel_mse_ema=0.992265
+t=6.5s steps_total=3739 rate_s=310 step_avg_ms=1.74 step_max_ms=7.67 rel_mse_ema=0.990866
+t=7.0s steps_total=3897 rate_s=316 step_avg_ms=1.80 step_max_ms=5.96 rel_mse_ema=0.989073
+t=7.5s steps_total=4061 rate_s=328 step_avg_ms=1.85 step_max_ms=6.06 rel_mse_ema=0.986700
+t=8.0s steps_total=4219 rate_s=316 step_avg_ms=1.90 step_max_ms=5.87 rel_mse_ema=0.983768
+t=8.5s steps_total=4375 rate_s=312 step_avg_ms=1.95 step_max_ms=6.39 rel_mse_ema=0.980063
+EVENT t=9.01s apply_delta experts[1]=exact experts[2]=exact
+   [gen=3 critical_section_us=20.9]
+t=9.0s steps_total=4529 rate_s=308 step_avg_ms=1.99 step_max_ms=5.91 rel_mse_ema=0.975385
+t=9.5s steps_total=4670 rate_s=282 step_avg_ms=2.04 step_max_ms=6.08 rel_mse_ema=0.981021
+t=10.0s steps_total=4813 rate_s=286 step_avg_ms=2.08 step_max_ms=6.83 rel_mse_ema=0.968381
+t=10.5s steps_total=4944 rate_s=262 step_avg_ms=2.13 step_max_ms=8.21 rel_mse_ema=0.936003
+t=11.0s steps_total=5103 rate_s=318 step_avg_ms=2.16 step_max_ms=5.58 rel_mse_ema=0.831729
+t=11.5s steps_total=5234 rate_s=262 step_avg_ms=2.20 step_max_ms=35.61 rel_mse_ema=0.699346
+t=12.0s steps_total=5382 rate_s=296 step_avg_ms=2.23 step_max_ms=6.98 rel_mse_ema=0.567468
+RESULT {"steps":5383, "final_rel_mse":0.56672376, "max_critical_section_us":231.2, "event_pause_us":[231.2,0.020,20.9], "kernel_final":"blocked"}

@@ -1,0 +1,8 @@
+# RUN 2026-08-23T23:53:31Z | RUSTFLAGS=-Ctarget-cpu=native
+# perf-lab roofline | W 4096x4096 fp32 | threads=32
+# B, time_ms, GB_s, GFLOP_s, AI_flop_per_byte
+B=1, 1.28, 52.6, 26.3, 0.50
+B=8, 7.97, 8.5, 33.7, 3.98
+B=64, 31.97, 2.2, 67.2, 31.03
+# expectation: B=1 GB/s ~= DRAM stream BW (bandwidth-bound even with naive code);
+#               GFLOP/s climbs with B while GB/s falls -> compute-bound regime
