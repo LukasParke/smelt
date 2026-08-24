@@ -1,7 +1,2 @@
-=== model-lab :: learn2 v3 — routed multi-site plasticity ===
-merkle verify: 38.9 ms
-LOAD ok cid=8ccc1709ddf54384
-
-thread 'main' (1374739) panicked at src/gpu.rs:76:39:
-cuda context: DriverError(CUDA_ERROR_DEVICE_UNAVAILABLE, "CUDA-capable device(s) is/are busy or unavailable")
-note: run with `RUST_BACKTRACE=1` environment variable to display a backtrace
+GPU: NVIDIA GeForce RTX 5090 | own-kernel path (NVRTC JIT, no cuBLAS)
+DEVHEADGRAD parity max_abs_diff=0.000034
