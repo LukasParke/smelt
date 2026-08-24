@@ -16,7 +16,7 @@ const MODULE: &str = "gpt2k";
 const FN_NAMES: &[&str] = &[
     "k_q8_gemv", "k_f32_gemv", "k_add_bias", "k_axpy",
     "k_layernorm", "k_gelu", "k_attn_decode", "k_scatter_kv", "k_q8_row",
-    "k_gather_row_f32", "k_adapter_apply",
+    "k_gather_row_f32", "k_adapter_apply", "k_wteT_dz",
 ];
 
 fn ptx_cache_path() -> PathBuf {

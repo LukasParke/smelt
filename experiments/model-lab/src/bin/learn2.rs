@@ -101,6 +101,31 @@ fn main() {
     let d = eng.meta.n_embd;
     println!("LOAD ok cid={}", hex(&cid[..8]));
 
+    // optional: verify DEVICE head-gradient against host reference
+    if std::env::var_os("SMT_DEV_HEADGRAD").is_some() {
+        let mut g = model_lab::gpu::Gpu::new(&eng);
+        g.ensure_head_f32(&eng);
+        let dz: Vec<f32> = (0..eng.meta.vocab)
+            .map(|i| (((i as u64).wrapping_mul(2654435761) % 1000) as f32 / 1000.0) - 0.5)
+            .collect();
+        let dev = g.head_backward_dev(&dz);
+        let host = {
+            let w = eng.vec_f32("wte.weight");
+            let dd = eng.meta.n_embd;
+            let mut dh = vec![0f32; dd];
+            for v in 0..eng.meta.vocab {
+                let gv = dz[v];
+                if gv != 0.0 {
+                    let row = &w[v * dd..v * dd + dd];
+                    for i in 0..dd { dh[i] += row[i] * gv; }
+                }
+            }
+            dh
+        };
+        let md: f32 = dev.iter().zip(host.iter()).map(|(a, b)| (a - b).abs()).fold(0.0, f32::max);
+        println!("DEVHEADGRAD parity max_abs_diff={md:.6}");
+    }
+
     // ---------- facts ----------
     fn pick(bpe: &Bpe, cands: &[&str]) -> String {
         cands.iter()
