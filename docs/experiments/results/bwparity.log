@@ -1,0 +1,50 @@
+merkle verify: 35.5 ms
+BWP ids=[464, 3139, 286, 4881] text="The capital of France is"
+STASH_VS_STEP max_abs_diff=0.000e0 argmax_agree=4/4 PASS
+GPU(bwd): NVIDIA GeForce RTX 5090 | own-kernel path (NVRTC JIT, no cuBLAS)
+PTX cache hit assets/ptx-cache-bwd/71ab83e71ad4d16f91793a5d9aa1596a.ptx
+KCHECK k_lin_input_grad [cpu-mirror] samples=24 max_rel=4.363e-7 tol=1e-4 PASS
+KCHECK k_ln_backward [cpu-mirror] samples=192 max_rel=9.232e-7 tol=1e-3 PASS
+KCHECK k_gelu_bwd [cpu-mirror] samples=32 max_rel=3.436e-6 tol=1e-3 PASS
+KCHECK k_attn_bwd_train [cpu-mirror] samples=120 max_rel=1.377e-4 tol=1e-2 PASS
+KCHECK k_lin_input_grad [gpu] samples=24 max_rel=4.363e-7 tol=1e-4 PASS
+KCHECK k_ln_backward [gpu] samples=192 max_rel=9.232e-7 tol=1e-3 PASS
+KCHECK k_gelu_bwd [gpu] samples=32 max_rel=1.096e-6 tol=1e-3 PASS
+KCHECK k_attn_bwd_train [gpu] samples=120 max_rel=1.350e-4 tol=1e-2 PASS
+BWPARITY_BACKEND=gpu
+--- BWPARITY table (analytic vs central-FD, h=0.01 relative) ---
+BWP 00 tok=464    idx=13   analytic=-4.200871e0 fd=-8.037138e-1 rel=8.09e-1
+BWP 01 tok=3139   idx=110  analytic=+8.030314e1 fd=+1.576464e0 rel=9.80e-1
+BWP 02 tok=286    idx=207  analytic=+9.906967e0 fd=-1.187802e-1 rel=1.01e0
+BWP 03 tok=4881   idx=304  analytic=-3.496912e1 fd=-9.238073e-2 rel=9.97e-1
+BWP 04 tok=464    idx=401  analytic=-1.518957e0 fd=+1.282611e-1 rel=1.08e0
+BWP 05 tok=3139   idx=498  analytic=-7.925480e0 fd=-5.942170e-1 rel=9.25e-1
+BWP 06 tok=286    idx=595  analytic=+1.651289e2 fd=-6.359727e-1 rel=1.00e0
+BWP 07 tok=4881   idx=692  analytic=+1.996226e1 fd=-1.425264e-2 rel=1.00e0
+BWP 08 tok=464    idx=21   analytic=-1.158405e1 fd=+5.459966e-1 rel=1.05e0
+BWP 09 tok=3139   idx=118  analytic=+4.462411e1 fd=+6.431323e-1 rel=9.86e-1
+BWP 10 tok=286    idx=215  analytic=-2.528220e1 fd=+5.967121e-1 rel=1.02e0
+BWP 11 tok=4881   idx=312  analytic=+4.253949e1 fd=+3.096507e-1 rel=9.93e-1
+BWP 12 tok=464    idx=409  analytic=+4.246140e0 fd=-1.360713e0 rel=1.32e0
+BWP 13 tok=3139   idx=506  analytic=+2.023716e1 fd=-1.121272e0 rel=1.06e0
+BWP 14 tok=286    idx=603  analytic=+4.012226e1 fd=+2.305992e-1 rel=9.94e-1
+BWP 15 tok=4881   idx=700  analytic=-2.677820e1 fd=-1.126361e-1 rel=9.96e-1
+BWP 16 tok=464    idx=29   analytic=-6.849219e0 fd=-2.111407e0 rel=6.92e-1
+BWP 17 tok=3139   idx=126  analytic=-1.187681e1 fd=-9.722326e-2 rel=9.92e-1
+BWP 18 tok=286    idx=223  analytic=-6.334597e0 fd=-7.341190e-1 rel=8.84e-1
+BWP 19 tok=4881   idx=320  analytic=-8.966065e0 fd=-9.139860e-2 rel=9.90e-1
+BWP 20 tok=464    idx=417  analytic=+3.625629e0 fd=+1.116237e0 rel=6.92e-1
+BWP 21 tok=3139   idx=514  analytic=-3.000546e1 fd=-1.714895e0 rel=9.43e-1
+BWP 22 tok=286    idx=611  analytic=-7.220487e1 fd=-2.263668e-1 rel=9.97e-1
+BWP 23 tok=4881   idx=708  analytic=+5.433086e0 fd=-1.466242e-2 rel=1.00e0
+BWP 24 tok=464    idx=37   analytic=-5.538987e0 fd=+1.239130e0 rel=1.22e0
+BWP 25 tok=3139   idx=134  analytic=-2.017680e1 fd=-5.614623e-1 rel=9.72e-1
+BWP 26 tok=286    idx=231  analytic=+1.256522e1 fd=-4.624205e-1 rel=1.04e0
+BWP 27 tok=4881   idx=328  analytic=-2.455718e1 fd=-9.796639e-2 rel=9.96e-1
+BWP 28 tok=464    idx=425  analytic=+1.595314e0 fd=+8.343602e-1 rel=4.77e-1
+BWP 29 tok=3139   idx=522  analytic=-4.968023e1 fd=-4.087018e0 rel=9.18e-1
+BWP 30 tok=286    idx=619  analytic=-2.549374e1 fd=-6.676006e-2 rel=9.97e-1
+BWP 31 tok=4881   idx=716  analytic=+9.994971e1 fd=-2.991368e-2 rel=1.00e0
+BWPARITY max_rel=1.320e0 target=<5e-2 FAIL
+ARGMAX_AGREE final-logits stash-vs-step 4/4 PASS
+BWPARITY_OVERALL=FAIL (parity=false kernel_checks=true stash=true)

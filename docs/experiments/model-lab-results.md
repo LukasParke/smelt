@@ -110,3 +110,44 @@ does not eliminate, interference at a single shared site.
 3. Trainer head-gradient runs on host (`k_wteT_dz` kernel exists for device-side later).
 4. Full-model backprop intentionally out of scope — this proves frozen-CAS base + plastic delta
    evolution, the deployment shape continual-learning systems require.
+
+---
+
+# Addendum 2: v2 routed multi-site session (gradient-freeze bug FIXED)
+
+Root cause of the earlier frozen run found & fixed: `adapter_backward` gated the dB accumulation
+inside a `b != 0` skip — with standard LoRA init (B=0) that zeroes the ONLY first-order gradient
+forever. Fix: accumulate dB unconditionally (A stays small-random). Evidence: `results/learn2.log`.
+
+## Results (40 epochs, ~185 s wall, 1443 token-forwards)
+
+| Metric | Baseline | Epoch 4 | Epoch 39 (final) |
+|---|---|---|---|
+| fact "lantern" rank / p | 30 413 / 3.6e-8 | **1 / 0.976** | **1 / ~1.00** |
+| fact "cavern" rank / p | 10 476 / 6.7e-7 | **1 / 0.981** | **1 / ~1.00** |
+| crosstalk (other word's rank under this prefix) | — | 2–3 | 6 / 14 |
+| held-out NLL (replay-slice active) | 3.575 | 3.948 peak | **3.103 (BELOW baseline!)** |
+
+Routed subspaces delivered crosstalk-free acquisition (other-fact word suppressed 10616→2..94),
+replay anchoring *improved* general held-out text, and both facts held p≈1.0 for 35 consecutive
+epochs — stable memory, not overfit flicker.
+
+## Consolidation into generation 2
+
+`consolidate::fold_sites` baked the adapter into host matrices (W' = W(I+Σbaᵀ), exact for
+pre-linear sites), requantized Q8, minted `gpt2-q8-gen2.smt` (new merkle cid, digests verified):
+plain pack, NO adapter — **f1_rank=1 p=1.000, f2_rank=1 p=0.999**. Learned knowledge became
+weight-native. Fold took 2.36 s.
+
+## Persistence
+
+Delta overlay (7.08 MB) round-trips with binding validation; reloaded adapter reproduces
+rank-1 knowledge exactly.
+
+## Remaining known issues
+1. bwparity full-trunk parity still FAILs (O(1)) despite per-kernel FD passes — composition-level
+   bug isolated to `trunk_input_grad`/stash wiring; training uses the CPU tape (FD-proven) meanwhile.
+2. Folded-vs-adapted logit maxdiff 4.86 / argmax 88.9% on non-probe positions = Q8 requantization
+   noise of the merged matrices (expected; tolerance documented).
+3. Mild cross-fact leakage at late epochs (rank 6–14 vs thousands baseline) — acceptable; per-fact
+   slice isolation keeps it bounded.

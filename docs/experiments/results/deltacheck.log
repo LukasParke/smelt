@@ -1,0 +1,19 @@
+merkle verify: 0.0 ms
+merkle verify: 0.0 ms
+[PASS] build_adapter 24 sites, r=8, d=768
+[PASS] routes_valid fact_ids [1,2,3] widths 3+3+2=8
+[PASS] contribution_nonzero max|Δ| with fact 1 = 8.217e-3
+[PASS] inactive_columns_exactly_zero max|Δ| under inactive perturbation = 0.000e0
+[PASS] empty_active_noop bit-identical
+[PASS] reference_match_attn max abs err vs f64 ref = 7.698e-8
+[PASS] reference_match_mlp max abs err vs f64 ref = 8.866e-8
+[PASS] full_set_reference_match max abs err vs f64 ref = 1.576e-7; toggling set changes output
+[PASS] mask_grads inactive ga/gb entries exactly 0, active untouched
+[PASS] roundtrip_bitexact 24 sites, all fields bit-exact
+[PASS] generation_counter gen=7 sites=24
+[PASS] binding_rejection rejected fake-cid engine: "delta binds to base b016bacffa6b99e95b70c9ffb349dc9605f60a664372d0eb4fac4bb57949bd64 but engine is e0156b32f686a10605670950ee264d7e3e0bfd7d321afe1976410f5ca2e0d4e8"
+[PASS] tamper_container_detected raw byte flip rejected
+[PASS] tamper_record_digest_detected record-level digest caught it: "digest mismatch on site.0"
+
+------------------------------------------------------------
+deltacheck: ALL CHECKS PASSED

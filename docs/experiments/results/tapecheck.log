@@ -1,0 +1,41 @@
+== tapecheck: CPU tape finite-difference proof ==
+merkle verify: 36.9 ms
+engine loaded in 0.1s
+tokens: [464, 3797, 3332, 319, 262, 2603]  ("The cat sat on the mat")
+tape weight cache built in 0.1s
+
+-- [1] forward parity vs Engine::step (adapters off, active=[]) --
+max |dlogit| vs Engine::step = 0.000e0   argmax agree (all positions): true
+
+-- [2] adapter-parameter FD gate (active=202, h=0.001 rel) --
+mean CE loss = 5.007948
+
+-- [3] wte-row gradient gate (directional FD, h=0.001 rel of |row|_inf) --
+
+param                                    analytic   central-diff    rel_err  PASS
+A site#04 SiteAttn{2} flat[4951]         0.000608       0.000609    1.55e-3  PASS
+A site#15 SiteMlp{7} flat[3482]          0.004528       0.004534    1.18e-3  PASS
+A site#07 SiteMlp{3} flat[3846]          0.003325       0.003332    2.31e-3  PASS
+A site#21 SiteMlp{10} flat[3540]        -0.000340      -0.000325    4.67e-2  PASS
+A site#16 SiteAttn{8} flat[5578]         0.002210       0.002211    2.14e-4  PASS
+A site#09 SiteMlp{4} flat[3418]         -0.004525      -0.004510    3.47e-3  PASS
+A site#05 SiteMlp{2} flat[3710]          0.000449       0.000457    1.84e-2  PASS
+A site#17 SiteMlp{8} flat[4999]         -0.003215      -0.003215    4.10e-5  PASS
+B site#07 SiteMlp{3} flat[3222]         -0.007346      -0.007341    6.12e-4  PASS
+B site#17 SiteMlp{8} flat[5127]          0.009173       0.009161    1.27e-3  PASS
+B site#06 SiteAttn{3} flat[5891]         0.003100       0.003117    5.74e-3  PASS
+B site#09 SiteMlp{4} flat[3392]         -0.000887      -0.000889    2.17e-3  PASS
+B site#04 SiteAttn{2} flat[4109]        -0.001532      -0.001534    1.19e-3  PASS
+B site#11 SiteMlp{5} flat[4199]          0.003870       0.003870    1.04e-4  PASS
+B site#02 SiteAttn{1} flat[5005]        -0.001299      -0.001295    3.41e-3  PASS
+B site#01 SiteMlp{0} flat[5012]         -0.005697      -0.005696    1.52e-4  PASS
+W wte.row[262] +emb dir                 11.258439      11.258764    2.89e-5  PASS
+W wte.row[319] +emb dir                -18.530447     -18.529246    6.48e-5  PASS
+W wte.row[464] +emb dir                 -0.021875      -0.021530    1.58e-2  PASS
+W wte.row[2603] +emb dir                 1.900753       1.900751    1.01e-6  PASS
+W wte.row[3332] +emb dir               -18.872471     -18.871384    5.76e-5  PASS
+W wte.row[3797] +emb dir                -9.218351      -9.218595    2.65e-5  PASS
+W wte.row[33991]      dir                0.000001       0.000001    2.32e-5  PASS
+W wte.row[17286]      dir               -0.000094      -0.000094    1.81e-4  PASS
+
+GATE RESULT:: 24/24 sampled parameters under rel_err < 0.005
